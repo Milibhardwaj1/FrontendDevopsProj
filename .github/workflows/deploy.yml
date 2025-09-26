@@ -18,9 +18,7 @@ jobs:
     - name: Build Docker Image 
       run: docker build -t static-website:1.0 .
     - name: Push Docker Image to DockerHub 
-      env:
-        DOCKER_SECRET: ${{ secrets.DOCKER_SECRET }}
       run: |
-        docker login --username milibh53 --password "$DOCKER_SECRET"
+        echo "${{ secrets.DOCKER_SECRET }} | docker login --username milibh53 --password-stdin
         docker tag static-website:1.0 milibh53/static-website:1.0
         docker push milibh53/static-website:1.0
